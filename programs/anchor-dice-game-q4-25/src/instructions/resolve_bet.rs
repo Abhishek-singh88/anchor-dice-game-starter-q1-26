@@ -17,6 +17,7 @@ pub struct ResolveBet<'info>{
     #[account(mut)]
     pub house: Signer<'info>,
 
+    /// CHECK: Player is validated by the bet account `has_one = player` constraint.
     #[account(mut)]
     pub player: UncheckedAccount<'info>,
 
@@ -39,6 +40,7 @@ pub struct ResolveBet<'info>{
     #[account(
         address = solana_program::sysvar::instructions::ID
     )]
+    /// CHECK: Verified by address constraint to the instructions sysvar.
     pub instruction_sysvar: UncheckedAccount<'info>,
     pub system_program: Program<'info, System>,
 }
