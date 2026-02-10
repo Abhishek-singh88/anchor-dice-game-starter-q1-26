@@ -8,7 +8,7 @@ describe("anchor-dice-game-q4-25", () => {
 
   const program = anchor.workspace.anchorDiceGameQ425 as Program<AnchorDiceGameQ425>;
 
-  it("happy path", async () => {
+  it("resolves a winning bet", async () => {
     const provider = anchor.getProvider() as anchor.AnchorProvider;
     const connection = provider.connection;
     const house = (provider.wallet as anchor.Wallet).payer;
@@ -76,7 +76,7 @@ describe("anchor-dice-game-q4-25", () => {
     });
 
     await program.methods
-      .resolveBet(Array.from(signature))
+      .resolveBet(Buffer.from(signature))
       .accounts({
         house: house.publicKey,
         player: player.publicKey,
